@@ -46,7 +46,12 @@ const loginUser = async (req, res) => {
         res.status(200).json({
             success: true,
             message: 'User Logged Successfully!',
-            token: token
+            token: token,
+            data: {
+                id: existUser.id,
+                name: existUser.name,
+                email: existUser.email
+            }
         })
 
     } catch (err) {
@@ -57,4 +62,29 @@ const loginUser = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser };
+const getUserDetailsById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const existingUser = await User.findById(id);
+        if (!existingUser) {
+            res.status(400).json({
+                succuess: false,
+                message: "User not Found"
+            })
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "User Details Fetch successfully",
+            data: existingUser
+        })
+    } catch (err) {
+        res.status(500).json({
+            succuess: false,
+            message: err.message
+        })
+    }
+}
+
+module.exports = { registerUser, loginUser, getUserDetailsById };
