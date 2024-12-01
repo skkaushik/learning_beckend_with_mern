@@ -10,7 +10,7 @@ const PORT = 8080;
 app.use(express.json());
 
 //routes
-app.use('/api/v1/users', user)
+app.use('/api/v1/user', user)
 
 //mongodb connection
 connectDB();
