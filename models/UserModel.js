@@ -9,10 +9,27 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    password: {
+        type: String,
+        required: true,
+        maxlength: 6,
+    },
+    phoneNumber: {
+        type: String,
+        required: true
+    },
     address: {
         type: String,
         required: true
-    }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now, // Automatically set creation date
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now, // Automatically set update date
+    },
 });
 
 const UserModel = model('User', UserSchema);
