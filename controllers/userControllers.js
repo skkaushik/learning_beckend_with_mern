@@ -1,4 +1,13 @@
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
 const User = require('../models/UserModel');
+
+dotenv.config();
+
+// Create JWT Token
+const jwtToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+};
 
 const registerUser = async (req, res) => {
     const { name, email, address, password, phoneNumber } = req.body;
@@ -32,9 +41,12 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ message: "Invalid password" });
         }
 
+        const token = jwtToken(existUser.id);
+
         res.status(200).json({
             success: true,
-            message: 'User Logged Successfully!'
+            message: 'User Logged Successfully!',
+            token: token
         })
 
     } catch (err) {
