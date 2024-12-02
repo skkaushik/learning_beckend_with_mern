@@ -21,7 +21,7 @@ const registerUser = async (req, res) => {
         await newUser.save();
         res.status(201).json({
             success: true,
-            message: 'User Created Successfully!'
+            message: 'User Registered Successfully!'
         });
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -53,7 +53,6 @@ const loginUser = async (req, res) => {
                 email: existUser.email
             }
         })
-
     } catch (err) {
         res.status(500).json({
             success: false,
@@ -76,7 +75,7 @@ const getUserDetailsById = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "User Details Fetch successfully",
+            message: "User Details Fetch Successfully",
             data: existingUser
         })
     } catch (err) {
