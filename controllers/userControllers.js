@@ -10,14 +10,14 @@ const jwtToken = (id) => {
 };
 
 const registerUser = async (req, res) => {
-    const { name, email, address, password, phoneNumber } = req.body;
+    const { name, email, address, password, phoneNumber, role } = req.body;
 
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User Already Exist' });
         }
-        const newUser = new User({ name, email, address, password, phoneNumber });
+        const newUser = new User({ name, email, address, password, phoneNumber, role });
         await newUser.save();
         res.status(201).json({
             success: true,
@@ -40,8 +40,7 @@ const loginUser = async (req, res) => {
         if (!(existUser.password === password)) {
             return res.status(400).json({ message: "Invalid password" });
         }
-
-        const token = jwtToken(existUser.id);
+        const token = jwtToken(existUser);
 
         res.status(200).json({
             success: true,
@@ -88,7 +87,7 @@ const getUserDetailsById = async (req, res) => {
 
 const getUsers = async (req, res) => {
     try {
-        const usersList = await User.find();
+        const usersList = await User.find({role: 'user'});
 
         res.status(200).json({
             success: true,

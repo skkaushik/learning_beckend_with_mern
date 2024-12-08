@@ -22,6 +22,11 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        enum: ['admin', 'user'], // Define possible roles
+        required: true,
+    },
     createdAt: {
         type: Date,
         default: Date.now, // Automatically set creation date
