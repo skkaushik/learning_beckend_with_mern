@@ -86,4 +86,21 @@ const getUserDetailsById = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser, getUserDetailsById };
+const getUsers = async (req, res) => {
+    try {
+        const usersList = await User.find();
+
+        res.status(200).json({
+            success: true,
+            message: 'Users List Fetch Successfully',
+            data: usersList,
+        })
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        })
+    }
+}
+
+module.exports = { registerUser, loginUser, getUserDetailsById, getUsers };
