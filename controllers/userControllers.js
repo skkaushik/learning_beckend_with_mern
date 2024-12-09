@@ -87,7 +87,7 @@ const getUserDetailsById = async (req, res) => {
 
 const getUsers = async (req, res) => {
     try {
-        const usersList = await User.find({role: 'user'});
+        const usersList = await User.find({ role: 'user' });
 
         res.status(200).json({
             success: true,
@@ -102,4 +102,29 @@ const getUsers = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser, getUserDetailsById, getUsers };
+const deleteUserById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const response = await User.findByIdAndDelete(id);
+        console.log("response", response)
+        if (!response) {
+            return res.status(400).json({
+                success: false,
+                message: "User Not Found!"
+            })
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "User Deleted Successfully!"
+        })
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        })
+    }
+}
+
+module.exports = { registerUser, loginUser, getUserDetailsById, getUsers, deleteUserById };
