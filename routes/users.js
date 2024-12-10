@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { registerUser, loginUser, getUserDetailsById, getUsers, deleteUserById } = require('../controllers/userControllers');
+const { registerUser, loginUser, getUserDetailsById, getUsers, updateUserById, deleteUserById } = require('../controllers/userControllers');
 const { authMiddleware, authorizeRole } = require('../middleware/authMiddleware');
 
 router.post('/register', registerUser);
@@ -10,6 +10,8 @@ router.post('/login', loginUser);
 router.get('/details/:id', authMiddleware, getUserDetailsById);
 
 router.get('/list', authMiddleware, authorizeRole('admin'), getUsers);
+
+router.put('/update/:id',authMiddleware, authorizeRole('user'), updateUserById )
 
 router.delete('/delete/:id',authMiddleware, authorizeRole('admin'),  deleteUserById);
 
