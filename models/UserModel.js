@@ -24,16 +24,17 @@ const UserSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ['admin', 'user'], // Define possible roles
+        enum: ['admin', 'user'],
         required: true,
+        default: 'user',
     },
     createdAt: {
         type: Date,
-        default: Date.now, // Automatically set creation date
+        default: Date.now,
     },
     updatedAt: {
         type: Date,
-        default: Date.now, // Automatically set update date
+        default: Date.now,
     },
 });
 
