@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const user = require('./routes/users');
 const connectDB = require('./config/db');
 
@@ -8,6 +9,7 @@ const PORT = 8080;
 
 // body parser middleware
 app.use(express.json());
+app.use(cors());
 
 //routes
 app.use('/api/v1/user', user)
