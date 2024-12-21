@@ -7,12 +7,12 @@ router.post('/register', registerUser);
 
 router.post('/login', loginUser);
 
-router.get('/details/:id', authMiddleware, getUserDetailsById);
+router.get('/details/:id', getUserDetailsById);
 
-router.get('/list', authMiddleware, authorizeRole('admin'), getUsers);
+router.get('/list', getUsers);
 
-router.put('/update/:id',authMiddleware, authorizeRole('user'), updateUserById )
+router.put('/update/:id', updateUserById)
 
-router.delete('/delete/:id',authMiddleware, authorizeRole('admin'),  deleteUserById);
+router.delete('/delete/:id', deleteUserById);
 
 module.exports = router;
