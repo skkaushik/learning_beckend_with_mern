@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swagger/swaggerConfig');
 const user = require('./routes/users');
 const connectDB = require('./config/db');
 
@@ -10,6 +12,7 @@ const PORT = 8080;
 // body parser middleware
 app.use(express.json());
 app.use(cors());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //routes
 app.use('/api/v1/user', user)
@@ -23,5 +26,6 @@ app.use("/", (req, res)=>{
 
 //server start
 app.listen(PORT, () => {
-  console.log("Server is running")
+  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`API docs available at http://localhost:${PORT}/api-docs`);
 })
