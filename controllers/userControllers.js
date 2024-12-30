@@ -87,7 +87,7 @@ const getUserDetailsById = async (req, res) => {
 
 const getUsers = async (req, res) => {
     try {
-        const usersList = await User.find({ role: 'user' });
+        const usersList = await User.find({ role: 'individual' });
 
         res.status(200).json({
             success: true,
