@@ -92,12 +92,12 @@ router.post('/login', loginUser);
  *       404:
  *         description: User not found
  */
-router.get('/details/:id', getUserDetailsById);
+router.get('/details/:id', authMiddleware, authorizeRole('individual'), getUserDetailsById);
 
-router.get('/list', getUsers);
+router.get('/list', authMiddleware, authorizeRole('admin'), getUsers);
 
-router.put('/update/:id', updateUserById)
+router.put('/update/:id', authMiddleware, authorizeRole('admin'), updateUserById)
 
-router.delete('/delete/:id', deleteUserById);
+router.delete('/delete/:id', authMiddleware, authorizeRole('admin'), deleteUserById);
 
 module.exports = router;

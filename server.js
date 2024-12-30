@@ -20,10 +20,6 @@ app.use('/api/v1/user', user)
 //mongodb connection
 connectDB();
 
-app.use("/", (req, res)=>{
-  res.send("Hlw, Welcome To User Management System")
-})
-
 //server start
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
